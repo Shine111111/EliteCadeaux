@@ -1,16 +1,14 @@
 import styles from "./Navbar.module.css";
-import logo from "../assets/logo.png"; // Replace with your exact filename/extension
+import logo from "../assets/logo.png";
 
 export default function Navbar({ categories, activeCategory, onSelectCategory }) {
   return (
     <nav className={styles.navbar}>
-      {/* Brand / Logo Section */}
-      <div className={styles.brand}>
-        <img src={logo} alt="Company Logo" className={styles.logo} />
-        <span className={styles.brandName}>Elite Cadeaux</span> {/* Optional site title */}
+      <div className={styles.brand} onClick={() => onSelectCategory("all")}>
+        <img src={logo} alt="Logo" className={styles.logo} />
+        <span className={styles.brandName}>Elite Cadeaux</span>
       </div>
 
-      {/* Nav Links / Buttons */}
       <div className={styles.navLinks}>
         {categories.map((cat) => (
           <button

@@ -2,8 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
-  border-bottom: 1px solid #e0e0e0;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e5e7eb;
   background-color: #ffffff;
 }
 
@@ -15,39 +15,54 @@
 }
 
 .logo {
-  height: 40px;          /* Adjust height to fit your desired bar height */
-  width: auto;           /* Maintains original aspect ratio */
+  height: 40px;
+  width: auto;
   object-fit: contain;
 }
 
 .brandName {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #333333;
+  color: #1f2937;
 }
 
 .navLinks {
   display: flex;
-  gap: 10px;
+  gap: 24px;
+  align-items: center;
 }
 
+/* Reset button styling to plain text */
 .navBtn {
-  padding: 6px 14px;
+  background: none;
+  border: none;
+  padding: 4px 0;
+  margin: 0;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: #6b7280;              /* Default unselected text color */
   cursor: pointer;
-  border: 1px solid #d1d5db;
-  background-color: #f9fafb;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
 }
 
+/* Hover state for unselected items */
 .navBtn:hover {
-  background-color: #f3f4f6;
+  color: #2563eb;              /* Hover color (e.g., vibrant blue) */
 }
 
+/* Active / Selected state */
 .navBtn.active {
+  color: #2563eb;              /* Retains the hover color permanently */
   font-weight: 600;
-  background-color: #007bff;
-  color: #ffffff;
-  border-color: #007bff;
+  text-decoration: underline;  /* Underlined when selected */
+  text-underline-offset: 6px;  /* Spacing between text and underline */
+  text-decoration-thickness: 2px;
+}
+
+/* Ensures active buttons don't flicker or change color on hover */
+.navBtn.active:hover {
+  color: #2563eb;
 }
