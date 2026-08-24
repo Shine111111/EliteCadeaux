@@ -1,25 +1,115 @@
-.card {
-  border: 1px solid #e0e0e0;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: #ffffff;
+  position: relative;
+  z-index: 50;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.logo {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brandName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.navLinks {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Nav Item Container for Dropdown Positioning */
+.navItem {
+  position: relative;
+  display: inline-block;
+  padding: 6px 0; /* Creates an invisible bridge to prevent dropdown from disappearing */
+}
+
+/* Top-level Text Buttons */
+.navBtn {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  font-size: 0.95rem;
+  font-family: inherit;
+  font-weight: 500;
+  color: #4b5563;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.navBtn:hover,
+.navItem:hover .navBtn {
+  color: #2563eb;
+}
+
+.navBtn.active {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+
+/* Dropdown Menu Styling */
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 170px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 6px;
-  padding: 10px;
-  width: 160px;
-  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 6px 0;
+  z-index: 100;
 }
 
-.image {
+/* Show dropdown on hover */
+.navItem:hover .dropdownMenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownItem {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  text-align: left;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: #4b5563;
+  cursor: pointer;
   width: 100%;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 4px;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.title {
-  margin: 8px 0 4px;
-  font-size: 1rem;
+.dropdownItem:hover {
+  background-color: #f3f4f6;
+  color: #2563eb;
 }
 
-.badge {
-  font-size: 0.75rem;
-  color: #666;
-  text-transform: capitalize;
+.dropdownItemActive {
+  color: #2563eb;
+  font-weight: 600;
+  background-color: #eff6ff;
 }

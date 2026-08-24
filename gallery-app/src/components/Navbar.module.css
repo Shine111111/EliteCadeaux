@@ -1,68 +1,223 @@
+/* src/components/Navbar.module.css */
+
+.header {
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 .navbar {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-  border-bottom: 1px solid #e5e7eb;
-  background-color: #ffffff;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
-
-.logo {
-  height: 40px;
-  width: auto;
-  object-fit: contain;
-}
-
-.brandName {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #1f2937;
-}
-
-.navLinks {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-}
-
-/* Reset button styling to plain text */
-.navBtn {
-  background: none;
-  border: none;
-  padding: 4px 0;
-  margin: 0;
-  font-size: 1rem;
-  font-family: inherit;
-  font-weight: 500;
-  color: #6b7280;              /* Default unselected text color */
-  cursor: pointer;
-  text-decoration: none;
-  transition: color 0.2s ease;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 12px 24px;
   position: relative;
 }
 
-/* Hover state for unselected items */
-.navBtn:hover {
-  color: #2563eb;              /* Hover color (e.g., vibrant blue) */
+/* Brand Section */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
 }
 
-/* Active / Selected state */
+.logo {
+  height: 48px;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+}
+
+.brandName {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  white-space: nowrap;
+}
+
+/* Desktop Navigation */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.navItem {
+  position: relative;
+  padding: 8px 0;
+}
+
+/* Text Buttons */
+.navBtn {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 4px 0 !important;
+  margin: 0 !important;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #4b5563 !important;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+  font-family: inherit;
+}
+
+.navBtn:hover,
+.navItem:hover .navBtn {
+  color: #2563eb !important;
+}
+
 .navBtn.active {
-  color: #2563eb;              /* Retains the hover color permanently */
-  font-weight: 600;
-  text-decoration: underline;  /* Underlined when selected */
-  text-underline-offset: 6px;  /* Spacing between text and underline */
+  color: #2563eb !important;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 6px;
   text-decoration-thickness: 2px;
 }
 
-/* Ensures active buttons don't flicker or change color on hover */
-.navBtn.active:hover {
-  color: #2563eb;
+/* Desktop Hover Dropdown */
+.dropdownMenu {
+  display: none !important;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+  z-index: 1100;
+}
+
+.navItem:hover .dropdownMenu {
+  display: flex !important;
+  flex-direction: column;
+}
+
+.dropdownItem {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  padding: 9px 16px !important;
+  text-align: left;
+  font-size: 0.875rem;
+  color: #374151 !important;
+  cursor: pointer;
+  width: 100%;
+  white-space: nowrap;
+  font-family: inherit;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.dropdownItem:hover {
+  background-color: #f3f4f6 !important;
+  color: #2563eb !important;
+}
+
+.dropdownItemActive {
+  background-color: #eff6ff !important;
+  color: #2563eb !important;
+  font-weight: 600;
+}
+
+.mobileToggle {
+  display: none;
+}
+
+/* ==================================================== */
+/* Mobile Viewport (<= 992px)                           */
+/* ==================================================== */
+@media (max-width: 992px) {
+  .navbar {
+    justify-content: center;
+    padding: 14px 16px;
+  }
+
+  .mobileToggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 16px;
+    background: transparent;
+    border: none;
+    font-size: 1.6rem;
+    color: #111827;
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px;
+    z-index: 1200;
+  }
+
+  /* Slide-down / Full-width mobile drawer */
+  .navLinks {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid #e5e7eb;
+    padding: 12px 20px 24px;
+    box-sizing: border-box;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .navOpen {
+    display: flex !important;
+  }
+
+  .navItem {
+    width: 100%;
+    padding: 6px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .navBtn {
+    width: 100%;
+    text-align: left;
+    padding: 10px 0 !important;
+    font-size: 1rem;
+  }
+
+  /* 1. HIDE subcategories by default */
+  .dropdownMenu {
+    display: none !important;
+  }
+
+  /* 2. SHOW vertically only when the parent item is hovered */
+  .navItem:hover .dropdownMenu {
+    display: flex !important;
+    flex-direction: column !important;
+    position: static !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 4px 0 8px 16px !important;
+    background: transparent !important;
+    width: 100%;
+  }
+
+  .dropdownItem {
+    display: block !important;
+    width: 100% !important;
+    text-align: left !important;
+    padding: 8px 0 !important;
+    font-size: 0.9rem;
+    color: #6b7280 !important;
+  }
 }
