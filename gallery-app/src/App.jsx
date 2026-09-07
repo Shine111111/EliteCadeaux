@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Gallery from "./components/Gallery";
 import Home from "./components/Home";
 import { navSections, items } from "./data/items";
+import Footer from "./components/Footer"; // Import Footer
 
 export default function App() {
   const [currentView, setCurrentView] = useState("home");
@@ -30,7 +31,7 @@ export default function App() {
   }, [selectedFilter]);
 
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Navbar
         navSections={navSections}
         selectedFilter={selectedFilter}
@@ -39,11 +40,11 @@ export default function App() {
         onGoHome={handleGoHome}
       />
 
-      {currentView === "home" ? (
-        <Home />
-      ) : (
-        <Gallery items={filteredItems} />
-      )}
+      <div style={{ flex: 1 }}>
+        {currentView === "home" ? <Home /> : <Gallery items={filteredItems} />}
+      </div>
+
+      <Footer />
     </div>
   );
 }

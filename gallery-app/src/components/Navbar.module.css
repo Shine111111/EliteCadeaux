@@ -51,7 +51,10 @@
 
 .navItem {
   position: relative;
-  padding: 8px 0;
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  padding: 10px 0; /* Keeps hover active around the text */
 }
 
 /* Text Buttons */
@@ -84,11 +87,12 @@
   text-decoration-thickness: 2px;
 }
 
-/* Desktop Hover Dropdown */
+/* --- Desktop Dropdown Menu --- */
 .dropdownMenu {
-  display: none !important;
+  display: flex !important;
+  flex-direction: column;
   position: absolute;
-  top: 100%;
+  top: 100%; /* Flush against bottom edge of navItem */
   left: 0;
   min-width: 180px;
   background-color: #ffffff;
@@ -97,11 +101,45 @@
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   padding: 8px 0;
   z-index: 1100;
+
+  /* Animation Initial State */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  pointer-events: none;
+
+  /* 
+    Add a subtle 150ms delay on closing so brief cursor slips 
+    don't abruptly collapse the dropdown 
+  */
+  transition: 
+    opacity 0.2s ease 0.12s, 
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1) 0.12s, 
+    visibility 0.2s ease 0.12s;
 }
 
+/* 
+  Invisible Hover Bridge:
+  Creates an invisible 10px area above the dropdown card so moving 
+  the cursor across the boundary never loses hover focus
+*/
+.dropdownMenu::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: transparent;
+}
+
+/* Hover Reveal - Instant trigger on entry without delay */
 .navItem:hover .dropdownMenu {
-  display: flex !important;
-  flex-direction: column;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 0s; /* Opens immediately */
 }
 
 .dropdownItem {
@@ -195,21 +233,32 @@
     font-size: 1rem;
   }
 
-  /* 1. HIDE subcategories by default */
+  /* Mobile Dropdown: Accordion Slide */
   .dropdownMenu {
-    display: none !important;
-  }
-
-  /* 2. SHOW vertically only when the parent item is hovered */
-  .navItem:hover .dropdownMenu {
-    display: flex !important;
-    flex-direction: column !important;
     position: static !important;
     box-shadow: none !important;
     border: none !important;
-    padding: 4px 0 8px 16px !important;
     background: transparent !important;
+    padding: 0 0 0 16px !important;
     width: 100%;
+    transform: none !important;
+
+    /* Animated Accordion Initial State */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
+    transition: max-height 0.3s ease-in-out, opacity 0.25s ease, padding 0.3s ease;
+  }
+
+  /* Expand vertically on hover */
+  .navItem:hover .dropdownMenu {
+    max-height: 320px; /* Large enough to accommodate all subitems */
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    padding: 4px 0 10px 16px !important;
   }
 
   .dropdownItem {
